@@ -1,0 +1,9 @@
+{
+  "name": "code",
+  "private": true,
+  "dependencies": {
+    "bootstrap-sass-official": "~3.2.0",
+    "modernizr": "~2.8.2",
+    "slick.js": "~1.5.5"
+  }
+}
