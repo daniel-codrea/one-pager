@@ -1,0 +1,113 @@
+@mixin common {
+	margin: 0;
+	padding: 0;
+	color: #fff;
+	list-style: none;
+	text-transform: none;
+	font-weight: 300;
+	font-family: 'Neuton', serif;
+	line-height: 60px;
+}
+@mixin openmenu {
+	transform: translateX(0px);
+}
+.gn-menu-main {
+	@include common;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 60px;
+	font-size: 13px;
+	z-index: 200;
+	ul {
+		@include common;
+	}
+	a {
+		display: block;
+		height: 100%;
+		color: #fff;
+		text-decoration: none;
+		cursor: pointer;
+	}
+	li.gn-trigger {
+		display: block;
+		float: left;
+		height: 100%;
+		text-align: center;
+		position: relative;
+		width: 60px;
+		user-select: none;
+		background: rgba(0,0,0,0.5);
+		transition: width 0.3s;
+		&.gn-long-parent{
+			width: 340px;
+		}
+	}
+	i {
+		font-size: 24px;
+	}
+	&:after {
+		display: table;
+		clear: both;
+		content: "";
+	}
+}
+
+.no-touch {
+	.gn-menu-main a:hover {
+		background: rgba(0,0,0,0.8);
+		color: white;
+	}
+}
+
+.gn-menu-wrapper {
+	position: fixed;
+	top: 60px;
+	left: 0;
+	overflow: hidden;
+	width: 60px;
+	background: rgba(0,0,0,0.5);
+	transform: translateX(-60px);
+	transition: transform 0.3s, width 0.3s;
+	/* Accomodate this to contain all menu entries  60xnumber of entries */
+	min-height: 180px;
+	i {
+		padding: 0 18px;
+	}
+	.gn-scroller {
+		position: absolute;
+		overflow-y: scroll;
+		width: 370px;
+		height: 100%;
+	}
+	&.gn-open-all {
+		@include openmenu;
+		width: 340px;
+	}
+	&.gn-open-part {
+		@include openmenu;
+	}
+}
+
+.gn-menu {
+	text-align: left;
+	font-size: 18px;
+}
+
+
+
+
+@media screen and (max-width: 422px) {
+	.gn-menu-wrapper.gn-open-all {
+			transform: translateX(0px);
+			width: 100%;
+	}
+	li.gn-long-parent {
+		width: 100%;
+	}
+
+	.gn-menu-wrapper.gn-open-all .gn-scroller {
+			width: 130%
+	}
+}

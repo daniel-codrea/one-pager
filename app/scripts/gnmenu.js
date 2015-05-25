@@ -27,7 +27,9 @@
 	gnMenu.prototype = {
 		_init : function() {
 			this.trigger = this.el.querySelector( 'a.gn-menu-name' );
+			this.triggerIcon = this.el.querySelector( 'a.gn-menu-name i' );
 			this.menu = this.el.querySelector( 'nav.gn-menu-wrapper' );
+			this.parentMenu = this.el.querySelector( 'li.gn-trigger' );
 			this.isMenuOpen = false;
 			this.eventtype = mobilecheck() ? 'touchstart' : 'click';
 			this._initEvents();
@@ -49,6 +51,15 @@
 					self._openMenu();
 					document.addEventListener( self.eventtype, self.bodyClickFn );
 				} );
+
+				//make this work!!!!!
+				if (classie.has( this.parentMenu, 'gn-long-parent' )) {
+					classie.remove( this.triggerIcon, 'md-menu' );
+					classie.add( this.triggerIcon, 'md-close' );
+				} else {
+					classie.add( this.triggerIcon, 'md-menu' );
+					classie.remove( this.triggerIcon, 'md-close' );
+				}
 			}
 			this.trigger.addEventListener( this.eventtype, function( ev ) {
 				ev.stopPropagation();
@@ -63,6 +74,8 @@
 				}
 			} );
 			this.menu.addEventListener( this.eventtype, function(ev) { ev.stopPropagation(); } );
+
+
 		},
 		_openIconMenu : function() {
 			classie.add( this.menu, 'gn-open-part' );
@@ -75,6 +88,7 @@
 			classie.add( this.trigger, 'gn-selected' );
 			this.isMenuOpen = true;
 			classie.add( this.menu, 'gn-open-all' );
+			classie.add( this.parentMenu, 'gn-long-parent' );
 			this._closeIconMenu();
 		},
 		_closeMenu : function() {
@@ -82,6 +96,7 @@
 			classie.remove( this.trigger, 'gn-selected' );
 			this.isMenuOpen = false;
 			classie.remove( this.menu, 'gn-open-all' );
+			classie.remove( this.parentMenu, 'gn-long-parent' );
 			this._closeIconMenu();
 		}
 	}
